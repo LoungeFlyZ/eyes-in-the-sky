@@ -1,6 +1,5 @@
 #!/bin/bash
 
-/usr/bin/piaware-config mlat-results no
 /usr/bin/piaware-config receiver-type other
 
 [[ ! -z ${PIAWARE_HOST} ]]             &&  /usr/bin/piaware-config receiver-host ${PIAWARE_HOST} || PIAWARE_HOST="dump1090"

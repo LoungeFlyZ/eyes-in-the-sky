@@ -10,6 +10,9 @@ RUN apt-get update -qy \
     cmake \
     libusb-1.0.0-dev \
     build-essential \
+    install \
+    librtlsdr-dev \
+    debhelper \
     pkg-config
 
 RUN git clone git://git.osmocom.org/rtl-sdr.git \
@@ -21,13 +24,15 @@ RUN git clone git://git.osmocom.org/rtl-sdr.git \
     && ldconfig \
     && cp /root/rtl-sdr/rtl-sdr.rules /etc/udev/rules.d/
     
-#RUN git clone https://github.com/mutability/dump1090 \
+RUN git clone https://github.com/mutability/dump1090 \
+    && cd dump1090 \
+#    && make -j 4
+    && dpkg-buildpackage -b
+    
+    
+#RUN git clone https://github.com/malcolmrobb/dump1090 \
 #    && cd dump1090 \
 #    && make -j 4
-    
-RUN git clone https://github.com/malcolmrobb/dump1090 \
-    && cd dump1090 \
-    && make -j 4
 
 # web overview
 EXPOSE 8080
